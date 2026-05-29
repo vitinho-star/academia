@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novare Fight Academy - Serviços</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & VARIÁVEIS GERAIS
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        :root {
+            --cor-fundo: #0a0a0a;
+            --cor-card: #121212;
+            --cor-primaria: #e50914; /* Vermelho vibrante */
+            --cor-texto-claro: #ffffff;
+            --cor-texto-escuro: #777777;
+            --cor-borda: #222222;
+            --fonte-titulo: 'Oswald', sans-serif;
+            --fonte-corpo: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-claro);
+            font-family: var(--fonte-corpo);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVEGAÇÃO
+           ========================================================================== */
+        header {
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--cor-primaria);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cor-primaria);
+        }
+
+        .btn-matricula-nav {
+            background-color: transparent;
+            color: var(--cor-texto-claro);
+            border: 2px solid var(--cor-texto-claro);
+            padding: 10px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-matricula-nav:hover {
+            background-color: var(--cor-texto-claro);
+            color: var(--cor-fundo);
+        }
+
+        /* ==========================================================================
+           3. ESTRUTURA BASE DE SERVIÇOS (TABS)
+           ========================================================================== */
+        .servicos-section {
+            padding: 100px 0;
+        }
+
+        .section-sub {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--cor-primaria);
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--fonte-titulo);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        /* Menu das Abas internas */
+        .abas-menu {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--cor-borda);
+            padding-bottom: 20px;
+        }
+
+        .aba-btn {
+            background-color: var(--cor-card);
+            color: var(--cor-texto-claro);
+            border: 1px solid var(--cor-borda);
+            padding: 12px 30px;
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .aba-btn:hover, .aba-btn.ativa {
+            background-color: var(--cor-texto-claro);
+            color: var(--cor-fundo);
+            border-color: var(--cor-texto-claro);
+        }
+
+        /* Controle de visibilidade das abas */
+        .conteudo-aba {
+            display: none;
+        }
+
+        .conteudo-aba.ativa {
+            display: block;
+        }
+
+        /* ==========================================================================
+           4. ABA: PLANOS
+           ========================================================================== */
+        .grid-planos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+        .card-plano {
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            padding: 40px 30px;
+            border-radius: 4px;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .card-plano.popular {
+            border-color: var(--cor-primaria);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .plano-nome {
+            font-family: var(--fonte-titulo);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .plano-preco {
+            font-family: var(--fonte-titulo);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .plano-preco span {
+            font-size: 1rem;
+            color: var(--cor-texto-escuro);
+            font-family: var(--fonte-corpo);
+            font-weight: 400;
+        }
+
+        .plano-desc {
+            color: var(--cor-texto-escuro);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            min-height: 45px;
+        }
+
+        .plano-recursos {
+            border-top: 1px solid var(--cor-borda);
+            padding-top: 25px;
+            margin-bottom: 35px;
+        }
+
+        .plano-recursos li {
+            font-size: 0.95rem;
+            color: var(--cor-texto-claro);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plano-recursos li::before {
+            content: '■';
+            color: var(--cor-primaria);
+            font-size: 0.8rem;
+        }
+
+        .btn-plano {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            color: var(--cor-texto-claro);
+            border: 1px solid var(--cor-borda);
+            padding: 15px;
+            text-align: center;
+            font-family: var(--fonte-titulo);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-plano.popular .btn-plano {
+            background-color: var(--cor-primaria);
+            border-color: var(--cor-primaria);
+        }
+
+        .card-plano.popular .btn-plano:hover {
+            background-color: #b3070f;
+        }
+
+        .btn-plano:hover {
+            border-color: var(--cor-texto-claro);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ==========================================================================
+           5. ABA: HORÁRIOS (GRADE / AGENDA)
+           ========================================================================== */
+        .grade-horarios {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            padding: 30px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .dia-coluna {
+            min-width: 140px;
+        }
+
+        .dia-titulo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-borda);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .aula-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--cor-borda);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .aula-item:hover {
+            border-color: var(--cor-primaria);
+            background-color: rgba(229, 9, 20, 0.05);
+        }
+
+        .aula-hora {
+            font-size: 0.8rem;
+            color: var(--cor-texto-escuro);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .aula-nome {
+            font-family: var(--fonte-titulo);
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           6. ABA: MATRÍCULA (FORMULÁRIO)
+           ========================================================================== */
+        .form-matricula {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            padding: 50px 40px;
+            border-radius: 4px;
+        }
+
+        .form-header {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .form-header h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: var(--cor-texto-escuro);
+            font-size: 0.95rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .form-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-grupo.full-width {
+            grid-column: span 2;
+        }
+
+        .form-grupo label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+        }
+
+        .form-input {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--cor-borda);
+            color: var(--cor-texto-claro);
+            padding: 15px;
+            font-family: var(--fonte-corpo);
+            font-size: 0.95rem;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+        }
+
+        select.form-input {
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .btn-submit {
+            grid-column: span 2;
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            border: none;
+            padding: 18px;
+            font-family: var(--fonte-titulo);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #b3070f;
+        }
+
+        /* ==========================================================================
+           7. RESPONSIVIDADE (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-planos {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .section-title {
+                font-size: 2.3rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grupo.full-width {
+                grid-column: span 1;
+            }
+            .btn-submit {
+                grid-column: span 1;
+            }
+            .form-matricula {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Novare <span>FIGHT</span></a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="sobre.html" class="nav-link">Sobre</a>
+                <a href="servicos.html" class="nav-link active">Serviços</a>
+                <button class="btn-matricula-nav" onclick="mudarAba('matricula')">Matricular-se</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="servicos-section">
+            <div class="container">
+                <span class="section-sub">Planos e Agendamento</span>
+                <h2 class="section-title">Serviços</h2>
+
+                <div class="abas-menu">
+                    <button class="aba-btn ativa" onclick="mudarAba('planos')">Planos</button>
+                    <button class="aba-btn" onclick="mudarAba('horarios')">Horários</button>
+                    <button class="aba-btn" onclick="mudarAba('matricula')">Matrícula</button>
+                </div>
+
+                <div id="aba-planos" class="conteudo-aba ativa">
+                    <div class="grid-planos">
+                        <div class="card-plano">
+                            <h3 class="plano-nome">Básico</h3>
+                            <div class="plano-preco">R$ 149<span>/mês</span></div>
+                            <p class="plano-desc">Ideal para começar sua jornada nas artes marciais.</p>
+                            <ul class="plano-recursos">
+                                <li>1 modalidade à escolha</li>
+                                <li>3x por semana</li>
+                                <li>Acesso ao vestiário</li>
+                                <li style="color: var(--cor-texto-escuro); text-decoration: line-through; list-style: none; padding-left: 0;"><span style="visibility: hidden;">■</span>Kimono não incluso</li>
+                            </ul>
+                            <button class="btn-plano" onclick="mudarAba('matricula')">Escolher Plano</button>
+                        </div>
+
+                        <div class="card-plano popular">
+                            <span class="badge-popular">Popular</span>
+                            <h3 class="plano-nome">Guerreiro</h3>
+                            <div class="plano-preco">R$ 229<span>/mês</span></div>
+                            <p class="plano-desc">Para quem quer evoluir com mais intensidade.</p>
+                            <ul class="plano-recursos">
+                                <li>2 modalidades</li>
+                                <li>Treinos ilimitados</li>
+                                <li>Acesso total às dependências</li>
+                                <li>1 Kimono incluso</li>
+                            </ul>
+                            <button class="btn-plano" onclick="mudarAba('matricula')">Escolher Plano</button>
+                        </div>
+
+                        <div class="card-plano">
+                            <h3 class="plano-nome">Elite</h3>
+                            <div class="plano-preco">R$ 349<span>/mês</span></div>
+                            <p class="plano-desc">Experiência completa para atletas dedicados.</p>
+                            <ul class="plano-recursos">
+                                <li>Modalidades ilimitadas</li>
+                                <li>Treinos ilimitados</li>
+                                <li>Personal training (2x/mês)</li>
+                                <li>Kimono + proteções inclusos</li>
+                            </ul>
+                            <button class="btn-plano" onclick="mudarAba('matricula')">Escolher Plano</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="aba-horarios" class="conteudo-aba">
+                    <div class="grade-horarios">
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Seg</div>
+                            <div class="aula-item"><span class="aula-hora">07:00</span><span class="aula-nome">Muay Thai</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">Boxe</span></div>
+                            <div class="aula-item"><span class="aula-hora">18:00</span><span class="aula-nome">Jiu-Jitsu</span></div>
+                            <div class="aula-item"><span class="aula-hora">20:00</span><span class="aula-nome">MMA</span></div>
+                        </div>
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Ter</div>
+                            <div class="aula-item"><span class="aula-hora">07:00</span><span class="aula-nome">Boxe</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">Jiu-Jitsu</span></div>
+                            <div class="aula-item"><span class="aula-hora">18:00</span><span class="aula-nome">Krav Maga</span></div>
+                            <div class="aula-item"><span class="aula-hora">20:00</span><span class="aula-nome">Wrestling</span></div>
+                        </div>
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Qua</div>
+                            <div class="aula-item"><span class="aula-hora">07:00</span><span class="aula-nome">MMA</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">Wrestling</span></div>
+                            <div class="aula-item"><span class="aula-hora">18:00</span><span class="aula-nome">Muay Thai</span></div>
+                            <div class="aula-item"><span class="aula-hora">20:00</span><span class="aula-nome">Boxe</span></div>
+                        </div>
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Qui</div>
+                            <div class="aula-item"><span class="aula-hora">07:00</span><span class="aula-nome">Jiu-Jitsu</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">Krav Maga</span></div>
+                            <div class="aula-item"><span class="aula-hora">18:00</span><span class="aula-nome">MMA</span></div>
+                            <div class="aula-item"><span class="aula-hora">20:00</span><span class="aula-nome">Muay Thai</span></div>
+                        </div>
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Sex</div>
+                            <div class="aula-item"><span class="aula-hora">07:00</span><span class="aula-nome">Boxe</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">MMA</span></div>
+                            <div class="aula-item"><span class="aula-hora">18:00</span><span class="aula-nome">Wrestling</span></div>
+                            <div class="aula-item"><span class="aula-hora">20:00</span><span class="aula-nome">Jiu-Jitsu</span></div>
+                        </div>
+                        <div class="dia-coluna">
+                            <div class="dia-titulo">Sáb</div>
+                            <div class="aula-item"><span class="aula-hora">09:00</span><span class="aula-nome">Open Mat</span></div>
+                            <div class="aula-item"><span class="aula-hora">10:30</span><span class="aula-nome">Muay Thai</span></div>
+                            <div class="aula-item"><span class="aula-hora">12:00</span><span class="aula-nome">Kids BJJ</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="aba-matricula" class="conteudo-aba">
+                    <div class="form-matricula">
+                        <div class="form-header">
+                            <h3>Faça sua matrícula</h3>
+                            <p>Preencha os dados abaixo e comece sua jornada na Ronin Fight Academy.</p>
+                        </div>
+                        
+                        <form action="#" onsubmit="event.preventDefault(); alert('Matrícula enviada com sucesso!');">
+                            <div class="form-grid">
+                                <div class="form-grupo">
+                                    <label for="nome">Nome Completo</label>
+                                    <input type="text" id="nome" class="form-input" placeholder="Seu nome completo" required>
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="sobrenome">Sobrenome</label>
+                                    <input type="text" id="sobrenome" class="form-input" placeholder="Sobrenome" required>
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" class="form-input" placeholder="email@exemplo.com" required>
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="telefone">Telefone</label>
+                                    <input type="tel" id="telefone" class="form-input" placeholder="(92) 9 0000-0000" required>
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="modalidade">Modalidade Principal</label>
+                                    <select id="modalidade" class="form-input">
+                                        <option value="">Selecione...</option>
+                                        <option value="muaythai">Muay Thai</option>
+                                        <option value="jiujitsu">Jiu-Jitsu</option>
+                                        <option value="mma">MMA</option>
+                                        <option value="boxe">Boxe</option>
+                                        <option value="kravmaga">Krav Maga</option>
+                                        <option value="wrestling">Wrestling</option>
+                                    </select>
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="experiencia">Experiência</label>
+                                    <select id="experiencia" class="form-input">
+                                        <option value="">Selecione...</option>
+                                        <option value="iniciante">Iniciante (Nunca treinou)</option>
+                                        <option value="intermediario">Intermediário</option>
+                                        <option value="avancado">Avançado / Competidor</option>
+                                    </select>
+                                </div>
+                                <div class="form-grupo full-width">
+                                    <label for="plano">Plano Escolhido</label>
+                                    <select id="plano" class="form-input">
+                                        <option value="">Selecione...</option>
+                                        <option value="basico">Plano Básico - R$ 149/mês</option>
+                                        <option value="guerreiro" selected>Plano Guerreiro - R$ 229/mês</option>
+                                        <option value="elite">Plano Elite - R$ 349/mês</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn-submit">Finalizar Matrícula →</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function mudarAba(nomeAba) {
+            // Remove a classe 'ativa' de todos os conteúdos de abas
+            document.querySelectorAll('.conteudo-aba').forEach(conteudo => {
+                conteudo.classList.remove('ativa');
+            });
+
+            // Remove a classe 'ativa' de todos os botões do menu
+            document.querySelectorAll('.aba-btn').forEach(botao => {
+                botao.classList.remove('ativa');
+            });
+
+            // Adiciona a classe 'ativa' na aba correspondente
+            document.getElementById('aba-' + nomeAba).classList.add('ativa');
+
+            // Encontra o botão clicado para destacar visualmente (exceto se vier do header)
+            document.querySelectorAll('.aba-btn').forEach(botao => {
+                if(botao.textContent.toLowerCase() === nomeAba || (nomeAba === 'matricula' && botao.textContent.toLowerCase() === 'matrícula')) {
+                    botao.classList.add('ativa');
+                }
+            });
+            
+            // Rolagem suave automática para o topo das abas ao trocar
+            document.querySelector('.abas-menu').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>

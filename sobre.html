@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novare Fight Academy - Sobre Nós</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & VARIÁVEIS GERAIS
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        :root {
+            --cor-fundo: #0a0a0a;
+            --cor-card: #121212;
+            --cor-primaria: #e50914; /* Vermelho vibrante */
+            --cor-texto-claro: #ffffff;
+            --cor-texto-escuro: #777777;
+            --cor-borda: #222222;
+            --fonte-titulo: 'Oswald', sans-serif;
+            --fonte-corpo: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-claro);
+            font-family: var(--fonte-corpo);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVEGAÇÃO
+           ========================================================================== */
+        header {
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--cor-primaria);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cor-primaria);
+        }
+
+        .btn-matricula {
+            background-color: transparent;
+            color: var(--cor-texto-claro);
+            border: 2px solid var(--cor-texto-claro);
+            padding: 10px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-matricula:hover {
+            background-color: var(--cor-texto-claro);
+            color: var(--cor-fundo);
+        }
+
+        /* ==========================================================================
+           3. SEÇÃO SOBRE (HISTÓRIA)
+           ========================================================================== */
+        .sobre-historia {
+            padding: 100px 0 60px 0;
+        }
+
+        .section-sub {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--cor-primaria);
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--fonte-titulo);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .conteudo-historia {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Bloco de Destaque do Ano */
+        .ano-badge {
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .ano-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--cor-primaria);
+        }
+
+        .ano-numero {
+            font-family: var(--fonte-titulo);
+            font-size: 5rem;
+            color: var(--cor-texto-claro);
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .ano-texto {
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--cor-texto-escuro);
+            letter-spacing: 4px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* Textos da história */
+        .texto-narrativa p {
+            color: var(--cor-texto-escuro);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .texto-narrativa p strong {
+            color: var(--cor-texto-claro);
+        }
+
+        /* ==========================================================================
+           4. PILARES DA ACADEMIA
+           ========================================================================== */
+        .grid-pilares {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px 60px;
+            margin-top: 50px;
+            border-top: 1px solid var(--cor-borda);
+            padding-top: 50px;
+        }
+
+        .pilar-item {
+            display: flex;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .pilar-marcador {
+            color: var(--cor-primaria);
+            font-size: 1.2rem;
+            line-height: 1;
+            margin-top: 3px;
+        }
+
+        .pilar-titulo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--cor-texto-claro);
+        }
+
+        .pilar-desc {
+            color: var(--cor-texto-escuro);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ==========================================================================
+           5. SEÇÃO ESTRUTURA
+           ========================================================================== */
+        .estrutura {
+            padding: 80px 0 100px 0;
+            background-color: #050505;
+            border-top: 1px solid var(--cor-borda);
+        }
+
+        .grid-estrutura {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card-estrutura {
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .card-estrutura:hover {
+            border-color: #333;
+        }
+
+        .est-numero {
+            font-family: var(--fonte-titulo);
+            font-size: 3.5rem;
+            color: var(--cor-texto-claro);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .est-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--cor-texto-escuro);
+            letter-spacing: 2px;
+        }
+
+        /* ==========================================================================
+           6. RESPONSIVIDADE (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .conteudo-historia {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .grid-estrutura {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .section-title {
+                font-size: 2.3rem;
+            }
+            .grid-pilares {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .grid-estrutura {
+                grid-template-columns: 1fr;
+            }
+            .ano-badge {
+                padding: 40px 20px;
+            }
+            .ano-numero {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Novare <span>FIGHT</span></a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="sobre.html" class="nav-link active">Sobre</a>
+                <a href="servicos.html" class="nav-link">Serviços</a>
+                <a href="servicos.html" class="btn-matricula">Matricular-se</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="sobre-historia">
+            <div class="container">
+                <span class="section-sub">Nossa História</span>
+                <h2 class="section-title">Sobre a Novare Fight</h2>
+
+                <div class="conteudo-historia">
+                    <div class="ano-badge">
+                        <span class="ano-numero">2012</span>
+                        <span class="ano-texto">Fundada</span>
+                    </div>
+
+                    <div class="texto-narrativa">
+                        <p>A <strong>Novare Fight Academy</strong> nasceu em 2012 com uma visão clara: criar um espaço onde guerreiros de todos os níveis pudessem evoluir, seja no tatame, no ringue ou na vida.</p>
+                        
+                        <p>Fundada pelo Mestre Vitinho, faixa preta 4º grau em BJJ e ex-campeão estadual de Muay Thai, a academia cresceu de uma pequena sala para um complexo completo com mais de 800m².</p>
+                        
+                        <p>Hoje, somos referência em artes marciais no norte do Brasil, com uma equipe de instrutores certificados e centenas de alunos transformados.</p>
+                    </div>
+                </div>
+
+                <div class="grid-pilares">
+                    <div class="pilar-item">
+                        <span class="pilar-marcador">■</span>
+                        <div>
+                            <h3 class="pilar-titulo">Disciplina</h3>
+                            <p class="pilar-desc">O caminho começa na mente. Força de vontade e consistência superam o talento todos os dias.</p>
+                        </div>
+                    </div>
+
+                    <div class="pilar-item">
+                        <span class="pilar-marcador">■</span>
+                        <div>
+                            <h3 class="pilar-titulo">Respeito</h3>
+                            <p class="pilar-desc">Dentro e fora do tatame. Honramos nossos mestres, companheiros de treino e adversários.</p>
+                        </div>
+                    </div>
+
+                    <div class="pilar-item">
+                        <span class="pilar-marcador">■</span>
+                        <div>
+                            <h3 class="pilar-titulo">Evolução</h3>
+                            <p class="pilar-desc">Superação constante. Buscamos ser 1% melhor a cada treino, desafiando nossos próprios limites.</p>
+                        </div>
+                    </div>
+
+                    <div class="pilar-item">
+                        <span class="pilar-marcador">■</span>
+                        <div>
+                            <h3 class="pilar-titulo">Comunidade</h3>
+                            <p class="pilar-desc">Família de guerreiros. Um ambiente unido onde o crescimento de um impulsiona o do outro.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="estrutura">
+            <div class="container">
+                <div style="margin-bottom: 50px;">
+                    <span class="section-sub">Estrutura</span>
+                    <h2 class="section-title">Nossa Academia</h2>
+                </div>
+
+                <div class="grid-estrutura">
+                    <div class="card-estrutura">
+                        <span class="est-numero">800m²</span>
+                        <span class="est-label">Área Total</span>
+                    </div>
+
+                    <div class="card-estrutura">
+                        <span class="est-numero">3</span>
+                        <span class="est-label">Tatames</span>
+                    </div>
+
+                    <div class="card-estrutura">
+                        <span class="est-numero">2</span>
+                        <span class="est-label">Ringues</span>
+                    </div>
+
+                    <div class="card-estrutura">
+                        <span class="est-numero">15+</span>
+                        <span class="est-label">Instrutores</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
