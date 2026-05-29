@@ -330,74 +330,139 @@
             }
         }
 
+/* ==========================================================================
+           2. HEADER & NAVEGAÇÃO (Atualizado para funcionar em tudo)
+           ========================================================================== */
+        header {
+            border-bottom: 1px solid var(--cor-borda);
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            flex-shrink: 0; /* Impede a logo de amassar no celular */
+        }
+
+        .logo span {
+            color: var(--cor-primaria);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            white-space: nowrap; /* Garante que o texto não quebre em duas linhas */
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cor-primaria);
+        }
+
+        .btn-matricula {
+            background-color: transparent;
+            color: var(--cor-texto-claro);
+            border: 2px solid var(--cor-texto-claro);
+            padding: 10px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-matricula:hover {
+            background-color: var(--cor-texto-claro);
+            color: var(--cor-fundo);
+        }
+
         /* ==========================================================================
-   MENU MOBILE COLOQUE NO FINAL DO SEU <STYLE>
-   ========================================================================== */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-}
+           6. RESPONSIVIDADE (Ajustado para manter o menu do notebook no celular)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .grid-modalidades {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
 
-.menu-toggle .bar {
-    width: 30px;
-    height: 3px;
-    background-color: var(--cor-texto-claro);
-    transition: all 0.3s ease;
-}
+        @media (max-width: 768px) {
+            /* Ajustes do Menu para Celular (Sem Hamburguer) */
+            .nav-container {
+                flex-direction: column; /* Coloca a logo em cima e o menu embaixo se faltar espaço */
+                justify-content: center;
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
 
-/* Transforma o hamburguer em um "X" quando ativo */
-.menu-toggle.aberto .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-}
-.menu-toggle.aberto .bar:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.aberto .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-}
+            .nav-menu {
+                gap: 15px; /* Diminui o espaçamento entre os links */
+                width: 100%;
+                justify-content: center;
+                overflow-x: auto; /* Se o celular for muito pequeno, permite deslizar para o lado */
+                padding-bottom: 5px;
+                /* Remove a barra de rolagem visual para ficar mais limpo */
+                scrollbar-width: none; 
+            }
+            
+            .nav-menu::-webkit-scrollbar {
+                display: none;
+            }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex; /* Mostra o botão no celular */
-    }
+            .nav-link {
+                font-size: 0.8rem; /* Diminui um pouco a letra no celular */
+            }
 
-    .nav-menu {
-        display: flex; /* Muda de none para flex */
-        flex-direction: column;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background-color: rgba(10, 10, 10, 0.98);
-        border-bottom: 1px solid var(--cor-borda);
-        padding: 40px 20px;
-        gap: 25px;
-        transform: translateY(-150%); /* Joga o menu para cima, escondendo-o */
-        transition: transform 0.4s ease-in-out;
-        z-index: 1050;
-    }
+            .btn-matricula {
+                padding: 6px 12px; /* Diminui o tamanho do botão */
+                font-size: 0.75rem;
+            }
 
-    .nav-menu.aberto {
-        transform: translateY(0); /* Traz o menu para baixo quando ativo */
-    }
-
-    .nav-link {
-        font-size: 1.2rem;
-        text-align: center;
-        width: 100%;
-    }
-
-    .btn-matricula {
-        text-align: center;
-        width: 100%;
-        margin-top: 10px;
-    }
-}
+            /* Resto do conteúdo da página */
+            .grid-modalidades {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .btn-principal, .btn-secundario {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
